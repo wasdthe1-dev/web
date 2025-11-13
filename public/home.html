@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home | TokenHelp</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="enhanced-animations.css" />
+</head>
+<body>
+  <header class="navbar scrolled">
+    <div class="nav-left">
+      <div class="logo">TokenHelp</div>
+    </div>
+    <nav class="nav-right">
+      <a href="#dashboard" class="nav-link">Dashboard</a>
+      <a href="/browse-tickets.html" class="nav-link">Browse Tickets</a>
+      <a href="/tickets.html" class="nav-link">My Tickets</a>
+      <a href="#settings" class="nav-link">Settings</a>
+      <div id="userMenu" style="display:flex; align-items:center; gap:12px">
+        <img id="userAvatar" src="" alt="User" style="width:36px; height:36px; border-radius:50%; border:2px solid var(--accent); cursor:pointer">
+        <button id="logoutBtn" class="nav-link" style="background:rgba(239,68,68,0.1); color:#ef4444; border:none; cursor:pointer; padding:8px 16px; border-radius:8px; font-weight:600">Logout</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" style="height:auto; min-height:60vh; padding-top:100px">
+    <div class="hero-bg"></div>
+    <div class="hero-content" data-aos="fade-up">
+      <h1 class="title" style="font-size:2.5rem">Welcome back, <span id="userName">User</span>! 👋</h1>
+      <p class="subtitle">Ready to help or get help today?</p>
+      
+      <div class="hero-ctas" style="margin-top:32px">
+        <button class="cta btn-primary" onclick="window.location.href='/create-ticket.html'">🎫 Create Help Ticket</button>
+        <button class="cta btn-secondary" onclick="window.location.href='/browse-tickets.html'">🔍 Browse All Tickets</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="section" style="padding-top:60px">
+    <div class="container">
+      <h2 class="section-title">Your Dashboard</h2>
+      
+      <div class="feature-grid" style="margin-top:32px">
+        <article class="feature-card" data-aos="fade-up">
+          <div class="icon">🪙</div>
+          <h3>Token Balance</h3>
+          <p id="tokenBalance" style="font-size:2rem; font-weight:800; color:var(--accent); margin:12px 0">5</p>
+          <p style="font-size:0.85rem">Available tokens</p>
+        </article>
+
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon">✅</div>
+          <h3>Completed Tasks</h3>
+          <p style="font-size:2rem; font-weight:800; color:var(--accent); margin:12px 0">0</p>
+          <p style="font-size:0.85rem">Tasks completed</p>
+        </article>
+
+        <article class="feature-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon">⭐</div>
+          <h3>Rating</h3>
+          <p style="font-size:2rem; font-weight:800; color:var(--accent); margin:12px 0">5.0</p>
+          <p style="font-size:0.85rem">Average rating</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="recent-tickets" class="section">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px">
+        <h2 class="section-title" style="margin:0">Recent Tickets</h2>
+        <a href="/tickets.html" style="color:var(--accent); font-weight:600; text-decoration:none">View All →</a>
+      </div>
+      <div id="recentTicketsContainer">
+        <div style="text-align:center; padding:60px 20px; color:var(--muted)">
+          <p style="font-size:3rem; margin-bottom:16px">📭</p>
+          <p style="font-size:1.1rem">No tickets yet. Create your first help ticket to get started!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="settings" class="section">
+    <div class="container">
+      <h2 class="section-title">Settings</h2>
+      
+      <!-- Theme Settings -->
+      <div class="settings-card" data-aos="fade-up" style="margin-bottom:32px">
+        <h3 style="color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px">
+          <span style="font-size:1.5rem">🎨</span> Appearance
+        </h3>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px">
+          <div>
+            <p style="font-weight:600; margin-bottom:4px">Theme Mode</p>
+            <p style="color:var(--muted); font-size:0.9rem">Choose your preferred color scheme</p>
+          </div>
+          <div style="display:flex; gap:12px">
+            <button id="darkModeBtn" class="theme-btn active">
+              <span style="font-size:1.2rem">🌙</span> Dark
+            </button>
+            <button id="lightModeBtn" class="theme-btn">
+              <span style="font-size:1.2rem">☀️</span> Light
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Settings -->
+      <div class="settings-card" data-aos="fade-up" data-aos-delay="100">
+        <h3 style="color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px">
+          <span style="font-size:1.5rem">👤</span> Profile Information
+        </h3>
+        
+        <form id="profileForm" class="profile-form">
+          <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <div style="display:flex; align-items:center; gap:16px; margin-top:8px">
+              <img id="profilePicturePreview" src="" alt="Profile" style="width:80px; height:80px; border-radius:50%; border:3px solid var(--accent)">
+              <div>
+                <input type="text" id="profilePictureUrl" placeholder="Enter image URL" style="margin-bottom:8px">
+                <p style="color:var(--muted); font-size:0.85rem">Paste an image URL to update your profile picture</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="profileName">Display Name</label>
+            <input type="text" id="profileName" placeholder="Your display name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="profileEmail">Email</label>
+            <input type="email" id="profileEmail" placeholder="your@email.com" disabled style="opacity:0.6; cursor:not-allowed">
+            <p style="color:var(--muted); font-size:0.85rem; margin-top:4px">Email cannot be changed (linked to Google account)</p>
+          </div>
+
+          <div class="form-group">
+            <label for="profilePhone">Phone Number</label>
+            <input type="tel" id="profilePhone" placeholder="+1 (555) 123-4567">
+          </div>
+
+          <div class="form-group">
+            <label for="profileBio">Bio</label>
+            <textarea id="profileBio" rows="4" placeholder="Tell us about yourself..."></textarea>
+          </div>
+
+          <div style="display:flex; gap:12px; margin-top:24px">
+            <button type="submit" class="save-btn">💾 Save Changes</button>
+            <button type="button" id="cancelBtn" class="cancel-btn">Cancel</button>
+          </div>
+          <div id="profileStatus" class="status" style="margin-top:12px"></div>
+        </form>
+      </div>
+
+      <!-- Account Settings -->
+      <div class="settings-card" data-aos="fade-up" data-aos-delay="200" style="margin-top:32px">
+        <h3 style="color:var(--accent); margin-bottom:20px; display:flex; align-items:center; gap:10px">
+          <span style="font-size:1.5rem">⚙️</span> Account
+        </h3>
+        <div style="display:flex; flex-direction:column; gap:16px">
+          <div style="padding:16px; background:rgba(0,240,208,0.05); border-radius:12px; border:1px solid rgba(0,240,208,0.2)">
+            <p style="font-weight:600; margin-bottom:4px">Account Status</p>
+            <p style="color:var(--muted); font-size:0.9rem">✓ Active and verified</p>
+          </div>
+          <div style="padding:16px; background:rgba(239,68,68,0.05); border-radius:12px; border:1px solid rgba(239,68,68,0.2)">
+            <p style="font-weight:600; margin-bottom:8px; color:#ef4444">Danger Zone</p>
+            <button id="deleteAccountBtn" style="background:transparent; border:2px solid #ef4444; color:#ef4444; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:all 0.3s">
+              Delete Account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="links">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#tickets">Tickets</a>
+        <a href="/">Home</a>
+      </div>
+      <div class="copyright">© 2025 TokenHelp. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, easing: 'ease-out-quart' });
+
+    // Check if user is logged in
+    let userData = JSON.parse(localStorage.getItem('tokenhelp_user') || '{}');
+    const accountComplete = localStorage.getItem('tokenhelp_account_complete');
+    
+    if (!userData.email) {
+      // Not logged in, redirect to home
+      window.location.href = '/';
+    } else if (!accountComplete) {
+      // Logged in but account not complete
+      window.location.href = '/create-account.html';
+    } else {
+      // Display user info
+      const firstName = userData.displayName?.split(' ')[0] || userData.name?.split(' ')[0] || 'User';
+      document.getElementById('userName').textContent = firstName;
+      document.getElementById('userAvatar').src = userData.picture || '';
+      
+      // Display token balance
+      const tokenBalance = userData.tokens || 5;
+      document.getElementById('tokenBalance').textContent = tokenBalance;
+      
+      // Load recent tickets
+      loadRecentTickets();
+      
+      // Initialize theme
+      initTheme();
+      
+      // Populate profile form
+      populateProfileForm();
+      
+      // Theme switcher
+      document.getElementById('darkModeBtn').addEventListener('click', () => setTheme('dark'));
+      document.getElementById('lightModeBtn').addEventListener('click', () => setTheme('light'));
+      
+      // Profile form submission
+      document.getElementById('profileForm').addEventListener('submit', handleProfileUpdate);
+      document.getElementById('cancelBtn').addEventListener('click', populateProfileForm);
+      
+      // Profile picture URL change
+      document.getElementById('profilePictureUrl').addEventListener('input', (e) => {
+        const url = e.target.value.trim();
+        if (url) {
+          document.getElementById('profilePicturePreview').src = url;
+        }
+      });
+      
+      // Delete account
+      document.getElementById('deleteAccountBtn').addEventListener('click', handleDeleteAccount);
+      
+      // Logout handler
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        if (confirm('Are you sure you want to logout?')) {
+          localStorage.removeItem('tokenhelp_user');
+          localStorage.removeItem('tokenhelp_account_complete');
+          window.location.href = '/';
+        }
+      });
+    }
+
+    // Load recent tickets
+    async function loadRecentTickets() {
+      const container = document.getElementById('recentTicketsContainer');
+      
+      try {
+        const response = await fetch(`/api/tickets/user/${userData.id}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to load tickets');
+        }
+        
+        const tickets = data.tickets || [];
+        
+        // Show only the 3 most recent tickets
+        const recentTickets = tickets.slice(0, 3);
+        
+        if (recentTickets.length === 0) {
+          container.innerHTML = `
+            <div style="text-align:center; padding:60px 20px; color:var(--muted)">
+              <p style="font-size:3rem; margin-bottom:16px">📭</p>
+              <p style="font-size:1.1rem">No tickets yet. Create your first help ticket to get started!</p>
+              <button onclick="window.location.href='/create-ticket.html'" class="btn-primary" style="margin-top:20px; padding:12px 24px">
+                🎫 Create Ticket
+              </button>
+            </div>
+          `;
+          return;
+        }
+        
+        container.innerHTML = recentTickets.map(ticket => {
+          const statusColors = {
+            'open': '#10b981',
+            'in-progress': '#f59e0b',
+            'completed': '#3b82f6',
+            'cancelled': '#ef4444'
+          };
+          
+          const statusIcons = {
+            'open': '🟢',
+            'in-progress': '🟡',
+            'completed': '✅',
+            'cancelled': '❌'
+          };
+          
+          const statusColor = statusColors[ticket.status] || '#666';
+          const statusIcon = statusIcons[ticket.status] || '⚪';
+          
+          return `
+            <div class="ticket-card" onclick="window.location.href='/ticket-details.html?id=${ticket.id}'" style="cursor:pointer; margin-bottom:20px">
+              <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:12px">
+                <h3 style="color:var(--accent); margin:0; font-size:1.2rem">${ticket.title}</h3>
+                <span style="background:${statusColor}22; color:${statusColor}; padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:600; white-space:nowrap">
+                  ${statusIcon} ${ticket.status.replace('-', ' ')}
+                </span>
+              </div>
+              
+              <p style="color:var(--muted); margin:0 0 16px 0; line-height:1.6">
+                ${ticket.description.substring(0, 100)}${ticket.description.length > 100 ? '...' : ''}
+              </p>
+              
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:12px; margin-bottom:16px">
+                <div>
+                  <p style="color:var(--muted); font-size:0.85rem; margin:0 0 4px 0">⏱️ Time</p>
+                  <p style="margin:0; font-weight:600">${ticket.timeRequired} hours</p>
+                </div>
+                <div>
+                  <p style="color:var(--muted); font-size:0.85rem; margin:0 0 4px 0">🪙 Cost</p>
+                  <p style="margin:0; font-weight:600; color:var(--accent)">${ticket.totalCost} tokens</p>
+                </div>
+                <div>
+                  <p style="color:var(--muted); font-size:0.85rem; margin:0 0 4px 0">📍 Location</p>
+                  <p style="margin:0; font-weight:600">${ticket.location.substring(0, 20)}${ticket.location.length > 20 ? '...' : ''}</p>
+                </div>
+              </div>
+              
+              <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid rgba(0,240,208,0.2)">
+                <p style="color:var(--muted); font-size:0.85rem; margin:0">
+                  ${new Date(ticket.createdAt).toLocaleDateString()}
+                </p>
+                <span style="color:var(--accent); font-weight:600; font-size:0.9rem">View Details →</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+        
+      } catch (err) {
+        console.error('Error loading recent tickets:', err);
+        container.innerHTML = `
+          <div style="text-align:center; padding:40px 20px; color:#ef4444">
+            <p style="font-size:2rem; margin-bottom:12px">❌</p>
+            <p>Failed to load tickets</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Theme functions
+    function initTheme() {
+      const savedTheme = localStorage.getItem('tokenhelp_theme') || 'dark';
+      setTheme(savedTheme, false);
+    }
+
+    function setTheme(theme, save = true) {
+      document.body.setAttribute('data-theme', theme);
+      
+      // Update button states
+      document.getElementById('darkModeBtn').classList.toggle('active', theme === 'dark');
+      document.getElementById('lightModeBtn').classList.toggle('active', theme === 'light');
+      
+      if (save) {
+        localStorage.setItem('tokenhelp_theme', theme);
+      }
+    }
+
+    // Populate profile form with user data
+    function populateProfileForm() {
+      document.getElementById('profilePicturePreview').src = userData.picture || '';
+      document.getElementById('profilePictureUrl').value = userData.picture || '';
+      document.getElementById('profileName').value = userData.displayName || userData.name || '';
+      document.getElementById('profileEmail').value = userData.email || '';
+      document.getElementById('profilePhone').value = userData.phone || '';
+      document.getElementById('profileBio').value = userData.bio || '';
+    }
+
+    // Handle profile update
+    async function handleProfileUpdate(e) {
+      e.preventDefault();
+      
+      const statusEl = document.getElementById('profileStatus');
+      statusEl.textContent = 'Saving changes...';
+      statusEl.className = 'status';
+      
+      const updatedData = {
+        userId: userData.id,
+        displayName: document.getElementById('profileName').value.trim(),
+        phone: document.getElementById('profilePhone').value.trim(),
+        bio: document.getElementById('profileBio').value.trim(),
+        picture: document.getElementById('profilePictureUrl').value.trim() || userData.picture
+      };
+      
+      try {
+        const response = await fetch('/api/user/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedData)
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to update profile');
+        }
+        
+        // Update local storage and UI
+        userData = data.user;
+        localStorage.setItem('tokenhelp_user', JSON.stringify(userData));
+        
+        // Update displayed info
+        const firstName = userData.displayName?.split(' ')[0] || userData.name?.split(' ')[0] || 'User';
+        document.getElementById('userName').textContent = firstName;
+        document.getElementById('userAvatar').src = userData.picture || '';
+        
+        statusEl.textContent = '✓ Profile updated successfully!';
+        statusEl.className = 'status success';
+        
+        setTimeout(() => {
+          statusEl.textContent = '';
+        }, 3000);
+        
+      } catch (err) {
+        console.error('Profile update error:', err);
+        statusEl.textContent = 'Error: ' + err.message;
+        statusEl.className = 'status error';
+      }
+    }
+
+    // Handle account deletion
+    function handleDeleteAccount() {
+      const confirmed = confirm('⚠️ WARNING: This will permanently delete your account and all data. This action cannot be undone.\n\nAre you absolutely sure?');
+      
+      if (confirmed) {
+        const doubleConfirm = confirm('This is your last chance. Type YES in the next prompt to confirm deletion.');
+        if (doubleConfirm) {
+          const finalConfirm = prompt('Type YES to confirm account deletion:');
+          if (finalConfirm === 'YES') {
+            // TODO: Implement server-side account deletion
+            alert('Account deletion feature will be implemented soon.');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
